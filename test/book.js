@@ -24,13 +24,13 @@ chai.use(chaiHttp);
   });
 
 describe('/GET book using invalid param isb instead of isbn ', () => {
-      it('it should empty', (done) => {
-	let query = baseGetUrl.concat('getBook&isb=123456789');
+      it('it should return status code of 400', (done) => {
+	let query = baseGetUrl.concat('&function=getBook&isb=123456789');
 	console.log(query);
         chai.request(hostName)
 	    .get(query)
             .end((err, res) => {
-		res.body.should.be.empty;
+		//res.body.should.be.empty;
 		res.should.have.status(400);
               done();
             });
@@ -38,28 +38,42 @@ describe('/GET book using invalid param isb instead of isbn ', () => {
   });
 describe('/GET book using negative isbn', () => {
       it('it should return status code of 400 Bad Request', (done) => {
-	let query = baseGetUrl.concat('getBook&isbn=-1234556789');
+	let query = baseGetUrl.concat('&function=getBook&isb=-123456789');
 	console.log(query);
         chai.request(hostName)
 	    .get(query)
             .end((err, res) => {
 	//	res.body.should.be.a('Object');
-		res.body.should.be.empty;
+		//res.body.should.be.empty;
 		res.should.have.status(400);
               done();
             });
       });
   });
-describe('/GET book using negative isbn', () => {
-      it('it should return status code of 400 Bad Request', (done) => {
-	let query = baseGetUrl.concat('getBook&isbn=1234556789');
+describe('/GET book using isbn = 4', () => {
+      it('it should return an object', (done) => {
+	let query = baseGetUrl.concat('&function=getBook&isbn=4');
 	console.log(query);
         chai.request(hostName)
 	    .get(query)
             .end((err, res) => {
-	//	res.body.should.be.a('Object');
-		res.body.should.be.empty;
-		res.should.have.status(400);
+		res.body.should.be.a('Object');
+              done();
+            });
+      });
+  });
+describe('/GET book using isbn = 4', () => {
+      it('it should have ISBN property', (done) => {
+	let query = baseGetUrl.concat('&function=getBook&isbn=4');
+	console.log(query);
+        chai.request(hostName)
+	    .get(query)
+            .end((err, res) => {
+		res.body.should.be.a('Object');
+		console.log(res.body);
+		Object.keys(res.body).should.not.be.eql(0);
+		//let book = JSON.parse(res.body);
+		//book.shoud.have.property('ISBN');
               done();
             });
       });
