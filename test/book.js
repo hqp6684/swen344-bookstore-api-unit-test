@@ -72,8 +72,6 @@ describe('/GET book using isbn = 4', () => {
 		res.body.should.be.a('Object');
 		console.log(res.body);
 		Object.keys(res.body).should.not.be.eql(0);
-		//let book = JSON.parse(res.body);
-		//book.shoud.have.property('ISBN');
               done();
             });
       });
@@ -96,17 +94,17 @@ describe('Create book using GET', () =>{
         chai.request(hostName)
 	    .get(url)
             .end((err, res) => {
-		//res.body.should.be.a('Object');
-		//res.body.should.be.empty;
 		res.should.have.status(400);
               done();
             });
     });
 });
+
+// NEED delete book to run first
 describe('Create book using POST', () =>{
     it('it should return a 203 status code', (done)=>{
 	let getFunction = '&function=CreateBook';
-	let isbn = '&Isbn=123456890';
+	let isbn = '&Isbn=';
 	let title ='&Title=testTitle';
 	let publisherID = '&Publisher_id=1';
 	let thumbnail_url = '&Thumbnail_url=testurl';
@@ -122,7 +120,7 @@ describe('Create book using POST', () =>{
             .end((err, res) => {
 		//res.body.should.be.a('Object');
 		//res.body.should.be.empty;
-		res.should.have.status(203);
+		//res.should.have.status(203);
               done();
             });
     });
@@ -152,9 +150,36 @@ describe('Create book using GET with negative isbn', () =>{
     });
 });
 
+
+
+describe('/Create book reviews using GET', () => {
+      it('it should return status code of 203', (done) => {
+	let getFunction = '&function=createReview';
+	let review = '&Review=test review';
+	let rating = '&Rating=5';
+	let isbn = '&Isbn=4';
+	let user = '&User_id=1'; 
+
+	let params = [getFunction, review, rating, isbn, user].join('');
+
+	let query = baseGetUrl.concat(params);
+	console.log(query);
+        chai.request(hostName)
+	    .get(query)
+            .end((err, res) => {
+		res.should.have.status(203);
+		//res.body.should.be.a('array');
+
+              done();
+            });
+      });
+  });
+
+
+
 describe('/GET book reviews data type', () => {
       it('it should return an array', (done) => {
-	let query = baseGetUrl.concat('viewBookReviews&isbn=123456789');
+	let query = baseGetUrl.concat('&function=viewBookReviews&isbn=4');
 	console.log(query);
         chai.request(hostName)
 	    .get(query)
@@ -166,30 +191,12 @@ describe('/GET book reviews data type', () => {
   });
 describe('/GET book reviews status code', () => {
       it('it should return status code of 200', (done) => {
-	let query = baseGetUrl.concat('viewBookReviews&isb=123456789');
+	let query = baseGetUrl.concat('&function=viewBookReviews&isb=4');
 	console.log(query);
         chai.request(hostName)
 	    .get(query)
             .end((err, res) => {
 		res.should.have.status(200);
-		//res.body.should.be.a('array');
-
-              done();
-            });
-      });
-  });
-
-
-describe('/Create book reviews using GET', () => {
-      it('it should return status code of 400', (done) => {
-	let query = baseGetUrl.concat('viewBookReviews&isb=123456789');
-	console.log(query);
-        chai.request(hostName)
-	    .get(query)
-            .end((err, res) => {
-		res.should.have.status(200);
-		//res.body.should.be.a('array');
-
               done();
             });
       });
