@@ -103,7 +103,7 @@ describe('Create book using GET', () =>{
 // BLOCKED  - Let this pass for now
 // NEED delete book to run first
 describe('Create book using POST', () =>{
-    it('it should return a 203 status code', (done)=>{
+    it('it should return a 201 status code', (done)=>{
 	let getFunction = '&function=CreateBook';
 	let isbn = '&Isbn=';
 	let title ='&Title=testTitle';
@@ -121,7 +121,7 @@ describe('Create book using POST', () =>{
             .end((err, res) => {
 		//res.body.should.be.a('Object');
 		//res.body.should.be.empty;
-		//res.should.have.status(203);
+		//res.should.have.status(201);
               done();
             });
     });
@@ -175,7 +175,7 @@ describe('/Create book reviews using GET', () => {
   });
 
 describe('/Create book reviews using POST', () => {
-      it('it should return status code of 203', (done) => {
+      it('it should return status code of 201', (done) => {
 	let getFunction = '&function=createReview';
 	let review = '&Review=test review';
 	let rating = '&Rating=5';
@@ -189,7 +189,7 @@ describe('/Create book reviews using POST', () => {
         chai.request(hostName)
 	    .post(query)
             .end((err, res) => {
-		res.should.have.status(203);
+		res.should.have.status(201);
 		//res.body.should.be.a('array');
 
               done();
