@@ -9,7 +9,7 @@ let baseGetUrl = apiFile.concat('?team=book_store');
 
 chai.use(chaiHttp);
 
-describe('GET toggle book', () =>{
+describe('GET toggle book with isbn = 4 and previous state of book true', () =>{
 	it('it should return an empty json object', (done)=>{
 		let query = baseGetUrl.concat('&function=toggleBook&isbn=4&available=1');
 			chai.request(hostName)
@@ -22,37 +22,40 @@ describe('GET toggle book', () =>{
 	});
 });
 
-describe('/GET order book', () =>{
+describe('GET toggle book with isbn = 4 and previous state of book false', () =>{
+	it('it should return an empty json object', (done)=>{
+		let query = baseGetUrl.concat('&function=toggleBook&isbn=4&available=0');
+			chai.request(hostName)
+			.get(query)
+				.end((err, res) => {
+			res.body.should.be.a('Object');
+			res.body.should.be.empty;
+					done();
+				});
+	});
+});
+
+describe('/GET order book isbn = 4 and amount = 1', () =>{
 	it('it should return a number to indicate new amount', (done)=>{
 		let query = baseGetUrl.concat('&function=orderBook&isbn=4&amount=1');
 			chai.request(hostName)
 			.get(query)
 				.end((err, res) => {			
 			res.body.should.be.a('string');
-			res.body.should.be.least(0);
+			res.body.should.be.least(1);
 					done();
 				});
 	});
 });
 
-describe('/POST create review', () =>{
-	it('it should return an empty json object', (done)=>{
-		let getFunction = '&function=createReview';
-		let id = '&id=1';
-		let review = '&review=My test review';
-		let rating = '&rating=4';
-		let book_isbn = '&book_isbn=4';
-		let user_id = '&user_id=1';
-		
-		let params = [getFunction, id, review, rating, book_isbn,
-			user_id].join('');
-			
-		let url = baseGetUrl.concat(params);
+describe('/GET order book isbn = 4 and amount = 15', () =>{
+	it('it should return a number to indicate new amount', (done)=>{
+		let query = baseGetUrl.concat('&function=orderBook&isbn=4&amount=15');
 			chai.request(hostName)
-			.get(url)
+			.get(query)
 				.end((err, res) => {			
-			res.body.should.be.a('Object');
-			res.body.should.be.empty;
+			res.body.should.be.a('string');
+			res.body.should.be.least(15);
 					done();
 				});
 	});
