@@ -154,7 +154,7 @@ describe('Create book using GET with negative isbn', () =>{
 
 
 describe('/Create book reviews using GET', () => {
-      it('it should return status code of 203', (done) => {
+      it('it should return status code of 400', (done) => {
 	let getFunction = '&function=createReview';
 	let review = '&Review=test review';
 	let rating = '&Rating=5';
@@ -167,6 +167,27 @@ describe('/Create book reviews using GET', () => {
 	console.log(query);
         chai.request(hostName)
 	    .get(query)
+            .end((err, res) => {
+		res.should.have.status(400);
+              done();
+            });
+      });
+  });
+
+describe('/Create book reviews using POST', () => {
+      it('it should return status code of 203', (done) => {
+	let getFunction = '&function=createReview';
+	let review = '&Review=test review';
+	let rating = '&Rating=5';
+	let isbn = '&Isbn=4';
+	let user = '&User_id=1'; 
+
+	let params = [getFunction, review, rating, isbn, user].join('');
+
+	let query = baseGetUrl.concat(params);
+	console.log(query);
+        chai.request(hostName)
+	    .post(query)
             .end((err, res) => {
 		res.should.have.status(203);
 		//res.body.should.be.a('array');
