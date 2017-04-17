@@ -79,14 +79,14 @@ describe('/GET book using isbn = 4', () => {
 
 describe('Create book using GET', () =>{
     it('it should return status code 400', (done)=>{
-	let getFunction = '&function=CreateBook';
+	let getFunction = '&function=createBook';
 	let isbn = '&Isbn=123456890';
 	let title ='&Title=testTitle';
 	let publisherID = '&Publisher_id=1';
 	let thumbnail_url = '&Thumbnail_url=testurl';
 	let available = '&Available=0';
 	let count = '$Count=0';
-	
+
 	let params =  [getFunction,isbn,title,publisherID,thumbnail_url,available,count].join('');
 	let url = baseGetUrl.concat(params);
 	console.log(url);
@@ -104,14 +104,14 @@ describe('Create book using GET', () =>{
 // NEED delete book to run first
 describe('Create book using POST', () =>{
     it('it should return a 201 status code', (done)=>{
-	let getFunction = '&function=CreateBook';
+	let getFunction = '&function=createBook';
 	let isbn = '&Isbn=';
 	let title ='&Title=testTitle';
 	let publisherID = '&Publisher_id=1';
 	let thumbnail_url = '&Thumbnail_url=testurl';
 	let available = '&Available=0';
 	let count = '$Count=0';
-	
+
 	let params =  [getFunction,isbn,title,publisherID,thumbnail_url,available,count].join('');
 	let url = baseGetUrl.concat(params);
 	console.log(url);
@@ -129,14 +129,14 @@ describe('Create book using POST', () =>{
 
 describe('Create book using GET with negative isbn', () =>{
       it('it should return status code of 400 Bad Request', (done) => {
-	let getFunction = '&function=CreateBook';
+	let getFunction = '&function=createBook';
 	let isbn = '&Isbn=-123456890';
 	let title ='&Title=testTitle';
 	let publisherID = '&Publisher_id=1';
 	let thumbnail_url = '&Thumbnail_url=testurl';
 	let available = '&Available=0';
 	let count = '$Count=0';
-	
+
 	let params =  [getFunction,isbn,title,publisherID,thumbnail_url,available,count].join('');
 	let url = baseGetUrl.concat(params);
 	console.log(url);
@@ -159,7 +159,7 @@ describe('/Create book reviews using GET', () => {
 	let review = '&Review=test review';
 	let rating = '&Rating=5';
 	let isbn = '&Isbn=4';
-	let user = '&User_id=1'; 
+	let user = '&User_id=1';
 
 	let params = [getFunction, review, rating, isbn, user].join('');
 
@@ -180,7 +180,7 @@ describe('/Create book reviews using POST', () => {
 	let review = '&Review=test review';
 	let rating = '&Rating=5';
 	let isbn = '&Isbn=4';
-	let user = '&User_id=1'; 
+	let user = '&User_id=1';
 
 	let params = [getFunction, review, rating, isbn, user].join('');
 
@@ -223,5 +223,3 @@ describe('/GET book reviews status code', () => {
             });
       });
   });
-
-
