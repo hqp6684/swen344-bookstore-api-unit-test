@@ -11,8 +11,11 @@ chai.use(chaiHttp);
 
 describe('GET toggle book with isbn = 4 and previous state of book true', () =>{
 	it('it should return an empty json object', (done)=>{
+	
 		let query = baseGetUrl.concat('&function=toggleBook&isbn=4&available=1');
-			chai.request(hostName)
+		console.log(query);
+
+		chai.request(hostName)
 			.get(query)
 				.end((err, res) => {
 			res.body.should.be.a('Object');
@@ -25,6 +28,8 @@ describe('GET toggle book with isbn = 4 and previous state of book true', () =>{
 describe('GET toggle book with isbn = 4 and previous state of book false', () =>{
 	it('it should return an empty json object', (done)=>{
 		let query = baseGetUrl.concat('&function=toggleBook&isbn=4&available=0');
+		console.log(query);
+			
 			chai.request(hostName)
 			.get(query)
 				.end((err, res) => {
@@ -38,7 +43,9 @@ describe('GET toggle book with isbn = 4 and previous state of book false', () =>
 describe('/GET order book isbn = 4 and amount = 1', () =>{
 	it('it should return a number to indicate new amount', (done)=>{
 		let query = baseGetUrl.concat('&function=orderBook&isbn=4&amount=1');
-			chai.request(hostName)
+		console.log(query);
+
+		chai.request(hostName)
 			.get(query)
 				.end((err, res) => {			
 			res.body.should.be.a('string');
@@ -51,6 +58,8 @@ describe('/GET order book isbn = 4 and amount = 1', () =>{
 describe('/GET order book isbn = 4 and amount = 15', () =>{
 	it('it should return a number to indicate new amount', (done)=>{
 		let query = baseGetUrl.concat('&function=orderBook&isbn=4&amount=15');
+		console.log(query);
+			
 			chai.request(hostName)
 			.get(query)
 				.end((err, res) => {			
