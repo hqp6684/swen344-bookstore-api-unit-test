@@ -61,12 +61,12 @@ describe('/GET book using isbn = 4', () => {
 describe('Create book using GET', () =>{
     it('it should return status code 400', (done)=>{
 	let getFunction = '&function=createBook';
-	let isbn = '&Isbn=123456890';
-	let title ='&Title=testTitle';
-	let publisherID = '&Publisher_id=1';
-	let thumbnail_url = '&Thumbnail_url=testurl';
-	let available = '&Available=0';
-	let count = '$Count=0';
+	let isbn = '&isbn=123456890';
+	let title ='&title=testTitle';
+	let publisherID = '&publisher_id=1';
+	let thumbnail_url = '&thumbnail_url=testurl';
+	let available = '&available=0';
+	let count = '$count=0';
 
 	let params =  [getFunction,isbn,title,publisherID,thumbnail_url,available,count].join('');
 	let url = baseGetUrl.concat(params);
@@ -86,12 +86,12 @@ describe('Create book using GET', () =>{
 describe('Create book using POST', () =>{
     it('it should return a 201 status code', (done)=>{
 	let getFunction = '&function=createBook';
-	let isbn = '&Isbn=';
-	let title ='&Title=testTitle';
-	let publisherID = '&Publisher_id=1';
-	let thumbnail_url = '&Thumbnail_url=testurl';
-	let available = '&Available=0';
-	let count = '$Count=0';
+	let isbn = '&isbn=';
+	let title ='&title=testTitle';
+	let publisherID = '&publisher_id=1';
+	let thumbnail_url = '&thumbnail_url=testurl';
+	let available = '&available=0';
+	let count = '$count=0';
 
 	let params =  [getFunction,isbn,title,publisherID,thumbnail_url,available,count].join('');
 	let url = baseGetUrl.concat(params);
@@ -111,12 +111,12 @@ describe('Create book using POST', () =>{
 describe('Create book using GET with negative isbn', () =>{
       it('it should return status code of 400 Bad Request', (done) => {
 	let getFunction = '&function=createBook';
-	let isbn = '&Isbn=-123456890';
-	let title ='&Title=testTitle';
-	let publisherID = '&Publisher_id=1';
-	let thumbnail_url = '&Thumbnail_url=testurl';
-	let available = '&Available=0';
-	let count = '$Count=0';
+	let isbn = '&isbn=-123456890';
+	let title ='&title=testTitle';
+	let publisherID = '&publisher_id=1';
+	let thumbnail_url = '&thumbnail_url=testurl';
+	let available = '&available=0';
+	let count = '$count=0';
 
 	let params =  [getFunction,isbn,title,publisherID,thumbnail_url,available,count].join('');
 	let url = baseGetUrl.concat(params);
@@ -137,10 +137,10 @@ describe('Create book using GET with negative isbn', () =>{
 describe('/Create book reviews using GET', () => {
       it('it should return status code of 400', (done) => {
 	let getFunction = '&function=createReview';
-	let review = '&Review=test review';
-	let rating = '&Rating=5';
-	let isbn = '&Isbn=4';
-	let user = '&User_id=1';
+	let review = '&review=test review';
+	let rating = '&rating=5';
+	let isbn = '&book_isbn=4';
+	let user = '&user_id=1';
 
 	let params = [getFunction, review, rating, isbn, user].join('');
 
@@ -158,18 +158,22 @@ describe('/Create book reviews using GET', () => {
 describe('/Create book reviews using POST', () => {
       it('it should return status code of 201', (done) => {
 	let getFunction = '&function=createReview';
-	let review = '&Review=test review';
-	let rating = '&Rating=5';
-	let isbn = '&Isbn=4';
-	let user = '&User_id=1';
+	//
 
-	let params = [getFunction, review, rating, isbn, user].join('');
+	let params = [getFunction].join('');
 
 	let query = baseGetUrl.concat(params);
 	console.log(query);
-        chai.request(hostName)
+        
+	chai.request(hostName)
 	    .post(query)
-            .end((err, res) => {
+		.set('content-type', 'application/x-www-form-urlencoded')
+		.type('form')
+		.send('review=test_review')
+		.send('rating=5')
+		.send('book_isbn=4')
+		.send('user_id=1')
+		.end((err, res) => {
 		res.should.have.status(201);
 		//res.body.should.be.a('array');
 
