@@ -19,13 +19,15 @@ chai.use(chaiHttp);
  * Postconditions:
  * 		The responce should include an Array with a single Book object with
  * 		an isbn = 4.
+ * 
  */
 describe('searchBooks using GET', () => {
 	it('it should return a 200 status code', (done) => {
 	let getFunction = '&function=searchBooks';
-	let isbn = '&isbn=4';
+	let search_attribute = '&search_attribute=isbn';
+	let search_string = '&search_string=4';
 	
-	let params = [getFunction,isbn].join('');
+	let params = [getFunction,search_attribute, search_string].join('');
 	let url = baseGetUrl.concat(params);
 	console.log(url);
 	
@@ -59,9 +61,10 @@ describe('searchBooks using GET', () => {
 describe('searchBooks using GET', () => {
 	it('it should return a 200 status code', (done) => {
 	let getFunction = '&function=searchBooks';
-	let available = '&available=1';
+	let search_attribute = '&search_attribute=available';
+	let search_string = '&search_string=1';
 	
-	let params = [getFunction,available].join('');
+	let params = [getFunction,search_attribute, search_string].join('');
 	let url = baseGetUrl.concat(params);
 	console.log(url);
 	
@@ -95,9 +98,10 @@ describe('searchBooks using GET', () => {
 describe('searchBooks using GET', () => {
 	it('it should return a 200 status code', (done) => {
 	let getFunction = '&function=searchBooks';
-	let title = '&title=*********title that exists********************';
-	
-	let params = [getFunction,title].join('');
+	let search_attribute = '&search_attribute=title';
+	let search_string = '&search_string=*********title that exists********************';
+
+	let params = [getFunction,search_attribute, search_string].join('');
 	let url = baseGetUrl.concat(params);
 	console.log(url);
 	
@@ -131,9 +135,10 @@ describe('searchBooks using GET', () => {
 describe('searchBooks using GET', () => {
 	it('it should return a 200 status code', (done) => {
 	let getFunction = '&function=searchBooks';
-	let thumbnail_url = '&thumbnail_url=*********thumbnail_url_that_exists********************';
-	
-	let params = [getFunction,thumbnail_url].join('');
+	let search_attribute = '&search_attribute=thumbnail_url';
+	let search_string = '&search_string=*********thumbnail_url that exists********************';
+
+	let params = [getFunction,search_attribute, search_string].join('');
 	let url = baseGetUrl.concat(params);
 	console.log(url);
 	
