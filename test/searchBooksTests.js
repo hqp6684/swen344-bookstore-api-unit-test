@@ -84,6 +84,43 @@ describe('searchBooks using GET', () => {
 });
 
 /*
+ * Searches books to find those that are NOT
+ * available.
+ * 
+ * Preconditions: 
+ * 		One or more books with available = 0 exist.
+ * 
+ * Postconditions:
+ * 		- The responce should include all of the books
+ * 		that are available as an Array.
+ * 
+ */
+describe('searchBooks using GET', () => {
+	it('it should return a 200 status code', (done) => {
+	let getFunction = '&function=searchBooks';
+	let search_attribute = '&search_attribute=available';
+	let search_string = '&search_string=0';
+	
+	let params = [getFunction,search_attribute, search_string].join('');
+	let url = baseGetUrl.concat(params);
+	console.log(url);
+	
+		chai.request(hostName)
+		.post(url)
+			.end((err, res) => {
+				res.body.should.be.a('Object');
+				res.should.have.status(200);
+				Object.keys(res.body).should.not.be.eql(0);
+				res.body.should.be.a('array');
+				//TODO:
+				//check the length and make sure it matches how 
+				//many books are actually NOT available in dummy data.
+					done();
+			});
+	});
+});
+
+/*
  * Searches books by a specific
  * title
  * 
@@ -155,3 +192,5 @@ describe('searchBooks using GET', () => {
 			});
 	});
 });
+
+//REPEAT ALL THE TESTS ABOVE WITH PARAMTERS THAT DO NOT MATCH ANY BOOKS IN THE SYSTEM
