@@ -102,7 +102,7 @@ describe('updateBook using POST', () => {
 	});
 });
 
-describe('updateBook using POST', () => {
+describe('updateBook using POST sending no parameters', () => {
 	it('it should return a 400 status code', (done) => {
 	let getFunction = '&function=updateBook';
 	let isbn = '&isbn=4';
@@ -112,7 +112,7 @@ describe('updateBook using POST', () => {
 	let available = '&available=1';
 	let count = '&count=56';
 	
-	let params = [getFunction,isbn,title,wrong_price,thumbnail_url,available,count].join('');
+	let params = [getFunction].join('');
 	let url = baseGetUrl.concat(params);
 	console.log(url);
 	

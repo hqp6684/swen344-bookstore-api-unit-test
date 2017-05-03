@@ -31,9 +31,9 @@ describe('/GET book using negative isbn', () => {
 	
       });
   });
-describe('/GET book using isbn = 4', () => {
+describe('/GET book using isbn = 2', () => {
       it('it should return an object', (done) => {
-	let query = baseGetUrl.concat('&function=getBook&isbn=4');
+	let query = baseGetUrl.concat('&function=getBook&isbn=2');
 	console.log(query);
         chai.request(hostName)
 	    .get(query)
@@ -43,9 +43,9 @@ describe('/GET book using isbn = 4', () => {
             });
       });
   });
-describe('/GET book using isbn = 4', () => {
+describe('/GET book using isbn = 2', () => {
       it('it should have ISBN property', (done) => {
-	let query = baseGetUrl.concat('&function=getBook&isbn=4');
+	let query = baseGetUrl.concat('&function=getBook&isbn=2');
 	console.log(query);
         chai.request(hostName)
 	    .get(query)
@@ -184,9 +184,9 @@ describe('/Create book reviews using POST', () => {
 
 
 
-describe('/GET book reviews data type', () => {
+describe('/GET book reviews data type using isbn 2', () => {
       it('it should return an array', (done) => {
-	let query = baseGetUrl.concat('&function=viewBookReviews&isbn=4');
+	let query = baseGetUrl.concat('&function=viewBookReviews&isbn=2');
 	console.log(query);
         chai.request(hostName)
 	    .get(query)
@@ -196,9 +196,9 @@ describe('/GET book reviews data type', () => {
             });
       });
   });
-describe('/GET book reviews status code', () => {
+describe('/GET book reviews status code using isbn 2', () => {
       it('it should return status code of 200', (done) => {
-	let query = baseGetUrl.concat('&function=viewBookReviews&isbn=4');
+	let query = baseGetUrl.concat('&function=viewBookReviews&isbn=2');
 	console.log(query);
         chai.request(hostName)
 	    .get(query)
